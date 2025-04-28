@@ -7,20 +7,28 @@ exports.getAll = async (req,res) => {
 }
 
 // POST /api/products
-exports.create = async (req,res) => {
-  // req.file est injecté par multer
-  if (!req.file) {
-    return res.status(400).json({ message: 'Photo requise' })
+exports.create = async (req, res) => {
+  try {
+    const { name, price, description, category } = req.body
+    const imageUrl = req.file.path // Attention : avec Cloudinary c'est .path !
+
+    const product = new Product({
+      name,
+      price,
+      description,
+      category,
+      imageUrl, // on sauvegarde l'URL Cloudinary ici
+      author: req.userId
+    })
+
+    await product.save()
+    res.status(201).json(product)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Error creating product' })
   }
-  const { name, description, category, price } = req.body
-  const imageUrl = `/uploads/${req.file.filename}`
-  const prod = await Product.create({
-    name, description, category,
-    price, imageUrl,
-    author: req.user._id
-  })
-  res.status(201).json(prod)
 }
+
 // after your existing exports.getAll & exports.create
 exports.getOne = async (req, res) => {
     try {
