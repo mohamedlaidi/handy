@@ -1,0 +1,160 @@
+/* Reset & Full-height Layout */
+html, body, #app {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  /* Wrapper that fills viewport (header + hero + footer) */
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px; /* height of header */
+    height: calc(100vh - 60px);
+    overflow: hidden;
+  }
+  
+  /* Header */
+  .main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #800000;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    z-index: 1000;
+  }
+  
+  /* Footer fixed at bottom */
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #800000;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    font-size: 0.9rem;
+    z-index: 1000;
+  }
+  
+  /* Sidebar remains beneath header and above footer */
+  .side-menu {
+    position: fixed;
+    top: 60px;
+    left: -200px;
+    width: 200px;
+    height: calc(100% - 110px); /* header + footer */
+    background-color: #c3a174;
+    transition: left 0.25s cubic-bezier(0.25,0.8,0.25,1);
+    padding-top: 1rem;
+    z-index: 999;
+    overflow-y: auto;
+  }
+  
+  /* Hero Section with centered image */
+  .hero {
+    flex: 1;
+    position: relative;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('/img/produit-artisanal-fait-main1.jpg') no-repeat center center;
+    background-size: cover;
+    filter: brightness(0.75);
+  }
+  .hero-bg::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  }
+  
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-text {
+    position: absolute;
+    top: 35%;
+    right: 5%;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1.5rem;
+    border-radius: 8px;
+    color: white;
+    max-width: 320px;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+  }
+  
+  .link-highlight {
+    color: #f3c892;
+    text-decoration: underline;
+  }
+  
+  /* CTA Button */
+  .cta-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: #f3c892;
+    color: #800000;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .cta-button:hover {
+    background: #e0b86f;
+    transform: scale(1.05);
+  }
+  
+  
+  /* Header icons and nav styling below remains unchanged */
+  .top-nav {
+    display: flex;
+    gap: 1rem;
+  }
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .nav-link:hover { text-decoration: underline; }
+  .icons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .icon-wrapper:hover { background: rgba(255,255,255,0.2); }
+  .icon {
+    width: 24px;
+    height: 24px;
+    stroke: #f3c892;
+    stroke-width: 2;
+  }
+  
