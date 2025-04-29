@@ -2,17 +2,16 @@
   "name": "handy-ecommerce",
   "version": "1.0.0",
   "scripts": {
-  "start": "node backend/server.js",
-  "build": "cd frontend && npm install && npm run build",
-  "install-client": "cd frontend && npm install",
-  "heroku-postbuild": "npm run build"
-},
+    "start": "node backend/server.js",
+    "build": "cd frontend && npm install && npm run build",
+    "install-client": "cd frontend && npm install",
+    "heroku-postbuild": "npm run build"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^1.41.3",
     "cors": "^2.8.5",
