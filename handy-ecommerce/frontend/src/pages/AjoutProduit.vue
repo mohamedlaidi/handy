@@ -131,3 +131,68 @@ async function submitProduct() {
   }
 }
 </script>
+
+<style scoped>
+.add-product-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+input[type="text"],
+input[type="number"],
+textarea,
+input[type="file"] {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.category-radio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.category-radio input { display: none; }
+.category-radio .dot {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #800000;
+  border-radius: 50%;
+  position: relative;
+}
+.category-radio input:checked + .dot::after {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 6px; height: 6px;
+  background-color: #800000;
+  border-radius: 50%;
+}
+.submit-btn {
+  padding: 0.75rem;
+  background-color: #800000;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+.submit-btn:hover {
+  background-color: #a00000;
+}
+</style>

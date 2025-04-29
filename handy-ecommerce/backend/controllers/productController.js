@@ -20,23 +20,19 @@ exports.getOne = async (req, res) => {
   }
 }
 
+// backend/controllers/productController.js
 exports.create = async (req, res) => {
   try {
-    const { name, description, price, category } = req.body
-    const imageUrl = req.file?.path // 📸 Cloudinary donne directement un .path
-
-    const newProduct = new Product({
-      name,
-      description,
-      price,
-      category,
-      imageUrl,
-      author: req.user.id
-    })
-
-    await newProduct.save()
-    res.status(201).json(newProduct)
+    const { name, description, price, category } = req.body;
+    const imageUrl = req.file?.path;
+    const newProduct = new Product({ name, description, price, category, imageUrl, author: req.user.id });
+    await newProduct.save();
+    return res.status(201).json(newProduct);
   } catch (err) {
-    res.status(400).json({ message: err.message })
+    console.error('❌ productController.create error:', err);
+    // renvoie d’avantage d’infos pour le debug
+    return res
+      .status(500)
+      .json({ message: err.message, stack: err.stack.split('\n').slice(0,3) });
   }
 }
