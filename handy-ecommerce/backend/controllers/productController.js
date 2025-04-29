@@ -1,45 +1,42 @@
+// backend/controllers/productController.js
 const Product = require('../models/Product')
 
-// GET /api/products
-exports.getAll = async (req,res) => {
-  const prods = await Product.find().populate('author','firstName lastName')
-  res.json(prods)
+exports.getAll = async (req, res) => {
+  try {
+    const products = await Product.find().populate('author', 'firstName lastName')
+    res.json(products)
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
 }
 
-// POST /api/products
+exports.getOne = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id).populate('author', 'firstName lastName')
+    if (!product) return res.status(404).json({ message: 'Product not found' })
+    res.json(product)
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+}
+
 exports.create = async (req, res) => {
   try {
-    const { name, price, description, category } = req.body
-    const imageUrl = req.file.path // Attention : avec Cloudinary c'est .path !
+    const { name, description, price, category } = req.body
+    const imageUrl = req.file?.path // 📸 Cloudinary donne directement un .path
 
-    const product = new Product({
+    const newProduct = new Product({
       name,
-      price,
       description,
+      price,
       category,
-      imageUrl, // on sauvegarde l'URL Cloudinary ici
-      author: req.userId
+      imageUrl,
+      author: req.user.id
     })
 
-    await product.save()
-    res.status(201).json(product)
-  } catch (error) {
-    console.error(error)
-    res.status(500).json({ message: 'Error creating product' })
+    await newProduct.save()
+    res.status(201).json(newProduct)
+  } catch (err) {
+    res.status(400).json({ message: err.message })
   }
 }
-
-// after your existing exports.getAll & exports.create
-exports.getOne = async (req, res) => {
-    try {
-      const prod = await Product
-        .findById(req.params.id)
-        .populate('author', 'firstName lastName')
-      if (!prod) return res.status(404).json({ message: 'Produit non trouvé' })
-      res.json(prod)
-    } catch (err) {
-      console.error(err)
-      res.status(500).json({ message: 'Erreur serveur' })
-    }
-  }
-  

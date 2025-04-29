@@ -1,9 +1,11 @@
 // backend/server.js
 require('dotenv').config()
-const express  = require('express')
-const path     = require('path')
-const cors     = require('cors')
+const express = require('express')
+const path = require('path')
+const cors = require('cors')
 const mongoose = require('mongoose')
+
+require('./utils/cloudinary') // 📸 => connexion Cloudinary
 
 const app = express()
 
@@ -18,17 +20,11 @@ mongoose.connect(process.env.MONGO_URI, {
 // --- Middlewares API ---
 app.use(cors())
 app.use(express.json())
-// expose the uploads folder so images can be fetched by the front
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 // --- Routes API ---
-app.use('/api/auth',    require('./routes/auth'))
+app.use('/api/auth', require('./routes/auth'))
 app.use('/api/products', require('./routes/products'))
-app.use('/api/users', require('./routes/user'))
-// app.use('/api/orders',  require('./routes/orders'))
-
-// --- Uploads statiques ---
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+// app.use('/api/orders', require('./routes/orders'))
 
 // === SERVIR LE FRONT UNIQUEMENT EN PRODUCTION ===
 if (process.env.NODE_ENV === 'production') {
