@@ -10,7 +10,7 @@ function verifyToken(req, res, next) {
   if (!token) return res.status(401).send('Accès non autorisé');
 
   try {
-    const decoded = jwt.verify(token, 'secretkey'); // La clé secrète
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Utilise la clé d'environnement
     req.user = decoded;
     next();
   } catch (err) {
