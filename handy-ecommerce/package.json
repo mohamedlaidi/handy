@@ -2,11 +2,11 @@
   "name": "handy-ecommerce",
   "version": "1.0.0",
   "scripts": {
-    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
-    "dev:server": "node backend/server.js",
-    "dev:client": "npm --prefix frontend run dev",
-    "start": "node backend/server.js"
-  },
+  "start": "node backend/server.js",
+  "build": "cd frontend && npm install && npm run build",
+  "install-client": "cd frontend && npm install",
+  "heroku-postbuild": "npm run build"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",

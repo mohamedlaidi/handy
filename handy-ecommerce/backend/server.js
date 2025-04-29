@@ -24,6 +24,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 // --- Routes API ---
 app.use('/api/auth',    require('./routes/auth'))
 app.use('/api/products', require('./routes/products'))
+app.use('/api/users', require('./routes/user'))
 // app.use('/api/orders',  require('./routes/orders'))
 
 // --- Uploads statiques ---
