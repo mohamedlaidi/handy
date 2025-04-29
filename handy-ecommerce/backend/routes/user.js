@@ -1,6 +1,6 @@
 const express = require('express');
 const User = require('../models/User');
-const upload = require('../middlewares/upload');
+const { upload } = require('../middlewares/cloudinaryUpload');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
